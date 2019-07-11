@@ -5,7 +5,7 @@ class index extends common{
 
 	public function user(){
 		
-		$this->fetch('index');
+		$this->fetch('index'); 
 
 	}
 
