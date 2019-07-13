@@ -68,12 +68,22 @@ class register{
 		$controller = !empty($arr[2])? $arr[2] :'index';
 		$action = !empty($arr[3])? $arr[3] :'user';
 
-		$new_class = strtolower("\app\\$module\controller\\$controller");
+		$class = strtolower("\app\\$module\controller\\$controller");
 		
-		$class = new  $new_class($data1='',$data2='',$data3='',$data4='',$data5='',$data6='');
+		//反射
+	    $class = new \ReflectionClass($class);
 
-		$class->$action($data1='',$data2='',$data3='',$data4='',$data5='',$data6='');
+	    return $class->newInstanceArgs(func_get_args())->$action();
 
+
+	}
+
+	public function __call($className, $arguments) {
+
+echo "我是方法";
+
+			print_r($arguments);
+			print_r($className);
 	}
 
 

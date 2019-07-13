@@ -5,6 +5,8 @@ namespace core;
 
 trait jump{
 
+	public $lode;
+
 	//成功
 	public function success($data="操作成功~",$code="1"){
 
@@ -63,5 +65,24 @@ trait jump{
 
 
 	}
+
+	public function __call($name, $arg){
+
+		$name = "\core\\$name\\$name";
+
+		return call_user_func_array([new $name, array_shift($arg)], $arg);
+  	 	
+    }
+
+    public function __set($name,$value){
+    	
+    	
+    }
+
+    public function __get($name){
+
+    	if('load' == $name) return $this;
+    	
+    }
 
 } 
