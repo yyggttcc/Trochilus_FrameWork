@@ -44,6 +44,11 @@ trait jump{
 	//模板名称，参数
 	public function fetch($name='',$vars=[]){
 
+
+		if(empty($name)){
+			$name = get_class_methods($this)[0];
+		}
+	
 		$arr= explode("/", $name);
 
 		switch (count($arr)) {

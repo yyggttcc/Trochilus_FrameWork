@@ -1,9 +1,10 @@
 <?php
-
 namespace core;
 
 use core\debug\debug;
 use core\config\config;
+
+defined('DIR') OR exit('No direct script access allowed');
 
 class register{
 
@@ -17,6 +18,10 @@ class register{
 
 	//初始方法
 	public  static function init(){
+
+		date_default_timezone_set('PRC');
+
+		header("Content-Type: text/html; charset=UTF-8");
 
 		return new self;
 
@@ -66,7 +71,7 @@ class register{
 
 		$module = !empty($arr[1])? $arr[1] :'index';
 		$controller = !empty($arr[2])? $arr[2] :'index';
-		$action = !empty($arr[3])? $arr[3] :'user';
+		$action = !empty($arr[3])? $arr[3] :'index';
 
 		$class = strtolower("\app\\$module\controller\\$controller");
 		
@@ -75,15 +80,11 @@ class register{
 
 	    return $class->newInstanceArgs(func_get_args())->$action();
 
-
 	}
 
 	public function __call($className, $arguments) {
 
-echo "我是方法";
 
-			print_r($arguments);
-			print_r($className);
 	}
 
 
