@@ -176,7 +176,7 @@ class register{
 	//静态调用方法
 
 	public static function __callStatic($name,$avg){
-		
+	 	
 	}
 	
 

@@ -1,7 +1,5 @@
 <?php 
 
-
-
 return array (
   'debug' => true,
   'log' => true,
