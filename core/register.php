@@ -69,9 +69,9 @@ class register{
 
 		$arr = explode("/", $PATH_INFO);
 
-		$module = !empty($arr[1])? $arr[1] :'index';
-		$controller = !empty($arr[2])? $arr[2] :'index';
-		$action = !empty($arr[3])? $arr[3] :'index';
+		$module = !empty($arr[1])?:'index';
+		$controller = !empty($arr[2])?:'index';
+		$action = !empty($arr[3])?:'index';
 
 		$class = strtolower("\app\\$module\controller\\$controller");
 		

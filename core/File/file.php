@@ -1,10 +1,8 @@
 <?php
 
-namespace framework\file;
+namespace core\file;
 
-//文件类
-class  file {
-
+class  file{
 
 	//文件是否存在
 	public function isfile($file){

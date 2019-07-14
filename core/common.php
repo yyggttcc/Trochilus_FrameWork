@@ -14,3 +14,11 @@ if(!function_exists("dd")){
 		exit;
 	}
 }
+
+//验证码地址
+if(!function_exists('captcha')){
+	function captcha(){
+		$captcha = new \core\captcha();
+		$captcha->make();
+	}
+}
