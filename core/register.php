@@ -144,8 +144,13 @@ class register{
 	//静默输出
 	public static function output(){
 
+			$run_time = round((microtime(true)-self::$runtime),3);
+			if($run_time === 0){
+				$run_time = round((microtime(true)-self::$runtime),5);
+			}
 					
-			$str1 =  "运行时间:".round((microtime(true)-self::$runtime),3)."秒,";
+			$str1 =  "运行时间:".$run_time."秒,";
+
 
 			$size = memory_get_usage(true);
 			$unit=array('b','kb','mb','gb','tb','pb');
