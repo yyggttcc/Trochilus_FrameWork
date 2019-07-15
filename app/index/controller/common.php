@@ -2,12 +2,12 @@
 
 namespace app\index\controller;
 
-use core\Jump;
+use core\jump;
 
 
 class common{
 
-	use Jump;
+	use jump;
 
 	
 }
