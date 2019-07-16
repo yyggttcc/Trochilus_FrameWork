@@ -1,11 +1,9 @@
 <?php
 
+namespace core;
+
 class  cookie{
 
-
-	public function __construct($config){
-
-	}
 
 	public function set($name,$value,$expire='',$domain='/'){
 

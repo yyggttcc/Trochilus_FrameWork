@@ -2,7 +2,7 @@
 
 /*2019-07-12*/ 
 
-namespace 与光同尘的php框架，更小更快;
+namespace 与光同尘的php框架;
 
 use core\register;
 

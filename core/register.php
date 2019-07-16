@@ -1,8 +1,8 @@
 <?php
 namespace core;
 
-use core\debug\debug;
-use core\config\config;
+use core\debug;
+use core\config;
 
 defined('DIR') OR exit('No direct script access allowed');
 
@@ -22,6 +22,8 @@ class register{
 		date_default_timezone_set('PRC');
 
 		header("Content-Type: text/html; charset=UTF-8");
+
+		date_default_timezone_set("Asia/ShangHai");
 
 		return new self;
 
@@ -108,7 +110,7 @@ class register{
 		}else{
 
 			echo "当前引入:".$file."<br/>";
-			trigger_error("文件不存在");exit;
+			trigger_error("$file文件不存在");
 		}
 
 	}
@@ -118,7 +120,7 @@ class register{
 
 		if( config::name('app')->read('debug') !== true){
 
-			exit();
+			return false;
 		}
 
 		dd($data2);
@@ -133,7 +135,7 @@ class register{
 
 		if( config::name('app')->read('debug') !== true){
 
-			exit();
+			return false;
 		}
 
 		dd($data);

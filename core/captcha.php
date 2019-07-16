@@ -1,80 +1,14 @@
 <?php
 namespace core;
-use core\config\config;
-use core\session\session;
+use core\config;
+use core\session;
 
-class captcha{
+class captcha extends face{
 
 
-	protected $config;
-
-	public function __construct($config = []){
-
-		$this->config = array_merge(config::name('captcha')->read(),$config);
-
-	}
-
-	public function width($width){
-
-		$this->config['width'] = $width;
-
-		return  $this;
-	}
-
-	public function height($height){
-
-		$this->config['height'] = $height;
-
-		return  $this;
-	}
-
-	public function length($length){
-
-		$this->config['length'] = $length;
-
-		return  $this;
-
-	}
-
-	public function type($type){
-
-		$this->config['type'] = $type;
-
-		return  $this;
-
-	}
-
-	public function expire($expire){
-
-		$this->config['expire'] = $expire;
-
-		return  $this;
-	}
-
-	public function fontsize($fontsize){
-
-		$this->config['fontsize'] = $fontsize;
-
-		return  $this;
-	}
-
-	public function isline($isline){
-
-		$this->config['isline'] = $isline;
-
-		return  $this;
-	}
-
-	public function ispixel($ispixel){
-
-		$this->config['ispixel'] = $ispixel;
-
-		return  $this;
-	}
 
 	//随机数
 	public function rand_text(){
-
 
 		$text = $this->config[$this->config['type'].'Set'];
 

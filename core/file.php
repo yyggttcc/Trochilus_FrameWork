@@ -1,17 +1,8 @@
 <?php
-
 namespace core;
-use core/config;
 
 class  file{
 
-	public $config;
-
-	public function __construct($config=[]){
-		
-		$this->config = array_merge(config::init('file')->read(),$config);
-
-	}
 	//创建文件夹
 	public function mkdir(){
 
@@ -45,10 +36,11 @@ class  file{
 
 		if(!is_dir($dir)){
 
-			$mk = mkdir($dir);
+			$mk = mkdir($dir,077,true);
 
 			if(!$mk){
-				return '文件夹创建失败';
+
+				return $this->info('文件夹创建失败');
 			}
 
 		}
@@ -59,31 +51,34 @@ class  file{
 
 			switch($file['error']){
 		      case 1:
-		        return '上传文件超过了php配置文件中upload_max_filesize选项的值';
+		        $text =  '上传文件超过了php配置文件中upload_max_filesize选项的值';
 		        break;
 		      case 2:
-		        return '超过了表单MAX_FILE_SIZE限制的大小';
+		        $text =  '超过了表单MAX_FILE_SIZE限制的大小';
 		        break;
 		      case 3:
-		        return '文件部分被上传';
+		        $text =  '文件部分被上传';
 		        break;
 		      case 4:
-		        return '没有选择上传文件';
+		        $text =  '没有选择上传文件';
 		        break;
 		      case 6:
-		        return '没有找到临时目录';
+		        $text =  '没有找到临时目录';
 		        break;
 		      case 7:
 		      case 8:
-		        return '系统错误';
+		        $text =  '系统错误';
 		        break;
 		   }
+
+		   	return $this->info($text);
 
 		}
 
 		if($config['size'] !== true && $file['size'] > $config['size']){
 
-			return '文件大小超出规定限制';
+			return $this->info('文件大小超出规定限制');
+
 		}
 
 		switch ($config['rule']) {
@@ -101,7 +96,7 @@ class  file{
 		$type = 'txt';
 
 		if($config['ext'] ! == '' && !in_array($type, explode(',', $config['ext']))){
-			return '上传文件格式错误';
+			return $this->info('上传文件格式错误');
 		}
 
 		$save_file = $dir.'/'.$name.'.'.$type;
@@ -110,12 +105,23 @@ class  file{
 		
 
 		if($res){
-			return $save_file;
+			return $this->info($save_file, 1);
 		}
 
-		return '文件保存错误';
+		return $this->info('文件保存错误');
 
 
+
+	}
+	//上传返回信息
+	private function info($text , $code = 0){
+		
+		$arr = [
+			'info' => $text,
+			'code' => $code
+		];
+
+		return (object)$arr;
 
 	}
 	//创建文件

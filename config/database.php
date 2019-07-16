@@ -13,5 +13,9 @@ return [
     'password'        => 'root',
     // 端口
     'hostport'        => '3306',
+    //分布式
+    'hadoop'           => true ,
+    //记录日志
+    'log'           => true,
 
 ];

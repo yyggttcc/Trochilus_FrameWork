@@ -1,5 +1,4 @@
 <?php
-
 namespace core;
 //注册类
 
@@ -16,12 +15,14 @@ trait jump{
 			'code' =>$code
 
 		);
+
 		echo json_encode($arr);
-		exit;
+
+		return false;
 	}
 
 	//失败
-	public function error($data="操作成功~",$code="1"){
+	public function error($data="操作失败~",$code="0"){
 
 		$arr= array(
 
@@ -32,9 +33,10 @@ trait jump{
 
 		echo json_encode($arr);
 
-		exit;
+		return false;
 
 	}
+	
 	//跳转
 	public function redirect($url){
 		header('Location: '.$url);exit;
@@ -66,7 +68,7 @@ trait jump{
 				break;
 		}
 
-		include ($file);
+		include_once ($file);
 
 
 	}

@@ -1,6 +1,6 @@
 <?php
 
-namespace core\debug;
+namespace core;
 
 class  debug{
 
@@ -17,7 +17,17 @@ class  debug{
 
 		$text = "[".date('Y-m-d H:i:s')."] [".$type."]  "  .$text." \r\n";
 
-		error_log($text, 3, DIR."/return/log/".date('Y-m-d').".log");
+		$path  = DIR."/return/log/";
+
+		if(!is_dir($path)){
+
+			$r = mkdir($path,077,true);
+
+			if(!$r) error_log('文件夹创建失败');
+			
+		}
+
+		error_log($text, 3, $path.date('Y-m-d').".log");
 
 	}
 
