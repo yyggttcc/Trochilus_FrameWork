@@ -192,7 +192,7 @@ class db{
 
 			    		debug::log($explain_log,'explain_sql');
 
-	    			}else if( $explain_type[$data["type"]] > $explain_type[$config["explain"]] ){
+	    			}else if( $explain_type[$data["type"]] >= $explain_type[$config["explain"]] ){
 
 			    		$explain_log = "当前explain结果：".json_encode($data);
 

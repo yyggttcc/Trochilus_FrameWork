@@ -18,6 +18,6 @@ return [
     //记录日志
     'log'           => true,
     //记录explain
-    'explain' =>    true,
+    'explain' =>    'ALL',
 
 ];
