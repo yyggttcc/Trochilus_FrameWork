@@ -14,6 +14,8 @@ class db{
 
 	public static $data;
 
+	public static $config;
+
 	public $restful;
 
 	public $sql;
@@ -40,7 +42,7 @@ class db{
 	//链接数据库
 	public static function instance(){
 
-		$config = config::name('database')->read();
+		self::$config = $config = config::name('database')->read();
 
 		try {  
 
@@ -81,11 +83,11 @@ class db{
 
 		if(stristr($sql,'select')){
 
-			return self::select($sql);
+			return $this->select($sql);
 
 		}
 
-		return self::exec($sql); 
+		return $this->exec($sql); 
 	}
 
 	//读操作
@@ -104,7 +106,12 @@ class db{
 			$pod = $pod['read'];
 		}
 
+		
 		return $pod->query($sql)->fetchAll();
+		
+
+		
+		
 
 	}
 
@@ -158,9 +165,50 @@ class db{
     //写入日志
     public function log(){
 
-    	$text = "当前执行sql：".$this->sql;
+    	$config = self::$config;
+    	
+    	if($config['log'] === true){
 
-    	debug::log($text,'sql');
+    		$text = "当前执行sql：".$this->sql;
+
+    		debug::log($text,'sql');
+
+    		//记录
+    		if($config['explain'] !== false && stristr($this->sql,'select')){
+
+    			$data =($this->select("explain ".$this->sql))[0];
+
+    			$explain_type = ['system','const','eq_ref','ref','fulltext','ref_or_null','index_merge','unique_subquery','index_subquery','range','index','ALL'];
+
+    			if( in_array($data['type'], $explain_type) ){
+
+    				$explain_type = array_flip($explain_type);
+
+	    			//超过阀值记录或者true
+
+	    			if( true === $config["explain"] ){
+
+	    				$explain_log = "当前explain结果：".json_encode($data);
+
+			    		debug::log($explain_log,'explain_sql');
+
+	    			}else if( $explain_type[$data["type"]] > $explain_type[$config["explain"]] ){
+
+			    		$explain_log = "当前explain结果：".json_encode($data);
+
+			    		debug::log($explain_log,'explain_sql');
+
+    				}
+
+    			}
+	    		
+
+
+	    	}
+
+
+    	}
+    	
     }
 
 }

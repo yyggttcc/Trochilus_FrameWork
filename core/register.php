@@ -19,11 +19,9 @@ class register{
 	//初始方法
 	public  static function init(){
 
-		date_default_timezone_set('PRC');
+		date_default_timezone_set("Asia/ShangHai");
 
 		header("Content-Type: text/html; charset=UTF-8");
-
-		date_default_timezone_set("Asia/ShangHai");
 
 		return new self;
 
@@ -93,13 +91,9 @@ class register{
 	//自动加载文件
 	public static function autoload($class){
 	
-
 		$class =  str_replace('\\','/',$class);
-
 		
 		$file = DIR.$class.".php";
-
-		//echo "当前引入:".$file."<br/>";
 
 		if(file_exists($file)){
 
@@ -109,8 +103,8 @@ class register{
 
 		}else{
 
-			echo "当前引入:".$file."<br/>";
-			trigger_error("$file文件不存在");
+	
+			trigger_error("当前引入的文件：$file不存在");
 		}
 
 	}

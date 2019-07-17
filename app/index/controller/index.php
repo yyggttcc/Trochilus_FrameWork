@@ -9,7 +9,7 @@ class index extends common{
 
 
 	public function index(){
-
+		
 		$this->fetch(); 
 
 	}
