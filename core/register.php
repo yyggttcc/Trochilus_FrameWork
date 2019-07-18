@@ -65,20 +65,40 @@ class register{
 
 		require_once ( DIR."core/common.php");
 
-		$PATH_INFO = $_SERVER['PATH_INFO'];
+		//$PATH_INFO = $_SERVER['PATH_INFO'];
 
-		$arr = explode("/", $PATH_INFO);
+		$arr = [];
 
-		$module = !empty($arr[1])?:'index';
-		$controller = !empty($arr[2])?:'index';
-		$action = !empty($arr[3])?:'index';
+		if(isset($_SERVER['ORIG_SCRIPT_NAME']))  $arr = explode("/", $_SERVER['ORIG_SCRIPT_NAME']);	
+
+		$module = $arr[3] ?: 'index';
+		$controller = $arr[4] ?: 'index';
+		$action = $arr[5] ?: 'index';
 
 		$class = strtolower("\app\\$module\controller\\$controller");
+
+		//受保护目录 不可直接访问
+		if('protecteds' == $module){
+
+			$class = new \ReflectionMethod($class,'index');
+
+			$class -> setAccessible(true);
+
+		}
 		
 		//反射
 	    $class = new \ReflectionClass($class);
 
-	    return $class->newInstanceArgs(func_get_args())->$action();
+	    //获取类注解
+	    //方法是否存在
+	     
+	    if(!$class->hasMethod($action)){
+	    	trigger_error('当前方法不存在');
+	    }
+
+	    //$res = $class->getMethod($action)->getDocComment();
+
+	    return $class->newInstanceArgs()->$action();
 
 	}
 

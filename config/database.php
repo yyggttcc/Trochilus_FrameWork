@@ -17,7 +17,7 @@ return [
     'hadoop'           => true ,
     //记录日志
     'log'           => true,
-    //记录explain
+    //记录explain,true 全部 或者超过阀值
     'explain' =>    'ALL',
 
 ];

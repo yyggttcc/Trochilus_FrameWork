@@ -66,6 +66,8 @@ class  file{
 		        $text =  '没有找到临时目录';
 		        break;
 		      case 7:
+		      	$text =  '文件写入失败';
+		        break;
 		      case 8:
 		        $text =  '系统错误';
 		        break;
@@ -101,7 +103,8 @@ class  file{
 
 		$save_file = $dir.'/'.$name.'.'.$type;
 
-		$res = file_put_contents($save_file, file_get_contents($_FILES['tmp_name']));
+		$res = move_uploaded_file($save_file,$file['tmp_name']);
+		//$res = file_put_contents($save_file, file_get_contents($file['tmp_name']));
 		
 
 		if($res){
