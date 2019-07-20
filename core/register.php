@@ -18,6 +18,8 @@ class register{
 
 	//初始方法
 	public  static function init(){
+		
+		if(substr(PHP_VERSION, 0,1) < 7)  exit('PHP 版本不能小于7！');
 
 		date_default_timezone_set("Asia/ShangHai");
 
@@ -80,7 +82,7 @@ class register{
 		//受保护目录 不可直接访问
 		if('protecteds' == $module){
 
-			$class = new \ReflectionMethod($class,'index');
+			$class = new \ReflectionMethod($class,$action);
 
 			$class -> setAccessible(true);
 
