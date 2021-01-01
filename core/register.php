@@ -73,9 +73,9 @@ class register{
 
 		if(isset($_SERVER['ORIG_SCRIPT_NAME']))  $arr = explode("/", $_SERVER['ORIG_SCRIPT_NAME']);	
 
-		$module = $arr[3] ?: 'index';
-		$controller = $arr[4] ?: 'index';
-		$action = $arr[5] ?: 'index';
+		$module = isset($arr[3]) ?: 'index';
+		$controller = isset($arr[4]) ?: 'index';
+		$action = isset($arr[5]) ?: 'index';
 
 		$class = strtolower("\app\\$module\controller\\$controller");
 
@@ -132,13 +132,15 @@ class register{
 	}
 
 	//错误处理
-	public static function error_handler($data,$data2){
+	public static function error_handler($data,$data2,$errfile,$errline){
 
 		if( config::name('app')->read('debug') !== true){
 
 			return false;
 		}
 
+		echo ("File: ".$errfile."  Line:   ".$errline);
+		
 		dd($data2);
 
 	

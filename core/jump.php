@@ -68,7 +68,17 @@ trait jump{
 				break;
 		}
 
-		include_once ($file);
+		if(is_file($file)){
+
+			if(!empty($vars)){
+				extract($vars);
+			}
+			
+			include_once ($file);
+			
+		}
+		
+
 
 
 	}

@@ -9,6 +9,7 @@ use core\register;
 define('DIR', __DIR__.'/../');
 
 require_once( DIR.'core/register.php' );
+require_once( DIR.'vendor/autoload.php' );
 
 $ar = register::init()->default()->run();
 
