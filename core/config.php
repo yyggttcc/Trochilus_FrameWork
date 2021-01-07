@@ -24,9 +24,15 @@ class config{
 	}
 
 	//读取一个配置
-	public function read($name=''){
+	public function read($name='',$default= ""){
 
-		return empty($name) ? self::$arr : self::$arr[$name];
+	   if($arr[$name] == ''){
+            return $default;
+       }
+
+	   return $arr[$name];
+
+		//return empty($name) ? self::$arr : self::$arr[$name];
 
 
 	}
