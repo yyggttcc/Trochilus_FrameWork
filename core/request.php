@@ -47,7 +47,7 @@ class  request{
 			foreach ($data as $key => $value) {
 				
 				$res = explode("=", $value);
-				$arr[$res[0]] = $res[1];
+				$arr[$res[0]] = trim($res[1]);
 
 			}
 
