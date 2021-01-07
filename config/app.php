@@ -3,5 +3,5 @@
 return array (
   'debug' => true,
   'log' => true,
-  'name' => 'ssssss',
+  'name' => '与光同尘',
 );
