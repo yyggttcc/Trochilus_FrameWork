@@ -37,6 +37,11 @@ class config{
 
 	}
 
+	public static  function __callStatic($class,$var){
+
+        return (new self)->$class($var);
+    }
+
 	//写配置
 	public function write($name,$value){
 
