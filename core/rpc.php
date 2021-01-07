@@ -1,6 +1,7 @@
 <?php
 namespace  core\rpc;
 
+
 //参考 https://blog.csdn.net/weixin_33829657/article/details/92110553
 
 class rpc {
@@ -12,6 +13,7 @@ class rpc {
 
 
     public function __construct($serviceName){
+
         if (array_key_exists($serviceName, $this->rpcConfig)) {
             $this->serviceUrl = $this->rpcConfig[$serviceName];
             $this->serviceName = $serviceName;
