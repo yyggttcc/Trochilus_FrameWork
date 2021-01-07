@@ -26,11 +26,11 @@ class config{
 	//读取一个配置
 	public function read($name='',$default= ""){
 
-	   if($arr[$name] == ''){
+	   if(self::$arr[$name] == ''){
             return $default;
        }
 
-	   return $arr[$name];
+	   return self::$arr[$name];
 
 		//return empty($name) ? self::$arr : self::$arr[$name];
 
