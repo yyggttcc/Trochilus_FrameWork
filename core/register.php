@@ -37,6 +37,7 @@ class register{
 		error_reporting(E_ALL);
 
 		//错误处理
+
 		set_error_handler([__CLASS__,'error_handler']);
 
 		//异常处理
